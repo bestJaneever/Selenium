@@ -1,15 +1,13 @@
-import subprocess
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 def run_jupyter_with_selenium():
-    jupyter_url = "http://localhost:8880/lab"
-    jupyter_token = "1f5bbcfefa752866ca6f553a9ecbc125e8b51970c2674560"
+    jupyter_url = "http://localhost:8889/lab"
+    jupyter_token = "7a064a00dae1bc42c6012c5aa15de672e4e157f827551b09"
     full_url = f"{jupyter_url}/?token={jupyter_token}"
 
     # Configure and start Selenium
@@ -27,6 +25,9 @@ def run_jupyter_with_selenium():
             EC.presence_of_element_located((By.CLASS_NAME, "jp-DirListing-content"))
         )
         print(" Jupyter Notebook was successfully loaded.")
+
+        # idle for 5 secs
+        time.sleep(5)
 
         # Searching for the file
         file_name = "FinalTask_updated.ipynb"
@@ -47,6 +48,9 @@ def run_jupyter_with_selenium():
             EC.presence_of_element_located((By.CLASS_NAME, "jp-DirListing-content"))
         )
         print("File was successfully opened.")
+
+        # idle for 5 secs
+        time.sleep(5)
 
         print("Executing all cells in the notebook...")
         run_all_button = WebDriverWait(driver, 30).until(
